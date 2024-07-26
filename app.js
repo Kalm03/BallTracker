@@ -24,7 +24,7 @@ document.getElementById('update-form').addEventListener('submit', function (even
         k: parseInt(formData.get('k')),
         damageType: formData.get('damageType')
     };
-    fetch('/update', {
+    fetch('/BallTracker/update', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -43,7 +43,7 @@ document.getElementById('update-form').addEventListener('submit', function (even
 });
 
 document.getElementById('stop-button').addEventListener('click', function () {
-    fetch('/stop', {
+    fetch('/BallTracker/stop', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -56,7 +56,7 @@ document.getElementById('stop-button').addEventListener('click', function () {
 });
 
 document.getElementById('reset-button').addEventListener('click', function () {
-    fetch('/reset', {
+    fetch('/BallTracker/reset', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -75,7 +75,7 @@ document.getElementById('reset-button').addEventListener('click', function () {
 
 
 // Initial status fetch
-fetch('/status')
+fetch('/BallTracker/status')
     .then(response => response.json())
     .then(data => {
         updateStatus(data);

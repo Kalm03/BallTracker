@@ -16,7 +16,7 @@ let ball = {
 
 let cards = [{ id: '1', name: 'Elit', initiative: 15 }, { id: '2', name: 'Lionel', initiative: 10 }, { id: '3', name: 'Jam', initiative: 5 }];
 
-app.post('/update', ({ body: { i, j, k, damageType } }, res) => {
+app.post('/BallTracker/update', ({ body: { i, j, k, damageType } }, res) => {
     ball.position.i += i;
     ball.position.j += j;
     ball.position.k += k;
@@ -34,14 +34,14 @@ app.post('/update', ({ body: { i, j, k, damageType } }, res) => {
     res.json(ball);
 });
 
-app.post('/stop', (req, res) => {
+app.post('/BallTracker/stop', (req, res) => {
     ball.MP = Math.floor(ball.MP / 2);
     ball.AC = 8 + ball.MP;
     res.json(ball);
 });
 
 
-app.post('/reset', (req, res) => {
+app.post('/BallTracker/reset', (req, res) => {
     ball = {
         position: { i: 0, j: 0, k: 0 },
         MP: 0,
@@ -51,7 +51,7 @@ app.post('/reset', (req, res) => {
     res.json(ball);
 });
 
-app.get('/status', (req, res) => {
+app.get('/BallTracker/status', (req, res) => {
     res.json(ball);
 });
 
