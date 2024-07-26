@@ -106,41 +106,6 @@ button {
     margin-top: 5px;
 }
 
-#name,
-#initiative {
-    margin-right: 10px;
-    padding: 5px;
-}
-
-#card-list {
-    margin: 20px;
-    display: flex;
-    flex-direction: column;
-}
-
-.card {
-    border: 1px solid #ccc;
-    padding: 10px;
-    margin: 5px 0;
-    display: flex;
-    justify-content: space-between;
-    background-color: #f9f9f9;
-    align-items: center;
-}
-
-.card .name {
-    font-weight: bold;
-}
-
-.card i {
-    cursor: pointer;
-}
-
-.card.highlight {
-    border: 2px solid blue;
-    /* Highlight border color */
-}
-
 @layer fantasy-btn, fantasy-card;
 
 @layer fantasy-btn {
