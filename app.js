@@ -21,6 +21,10 @@ const damageColors = {
     Thunder: '#4682B4'
 };
 
+document.addEventListener('DOMContentLoaded', function () {
+    updateStatus(ball);
+});
+
 document.getElementById('update-form').addEventListener('submit', function (event) {
     event.preventDefault();
     const formData = new FormData(event.target);
@@ -67,8 +71,6 @@ document.getElementById('reset-button').addEventListener('click', function () {
     document.getElementById('j').value = 0;
     document.getElementById('k').value = 0;
 });
-
-updateStatus(ball);
 
 function updateStatus(ball) {
     const canvas = document.getElementById('myCanvas');

@@ -2,7 +2,7 @@
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css');
 
 body {
-    font-family: 'cormorant garamond', Times, serif, sans-serif;
+    font-family: 'Libre Baskerville';
     font-variant-caps: small-caps;
     margin: 0;
     padding: 0;
@@ -107,7 +107,7 @@ button {
 }
 
 .input-container input {
-    font-family: 'cormorant garamond', Times, serif, sans-serif;
+    font-family: 'Libre Baskerville';
     width: 30%;
     margin-left: 2px;
     margin-top: 5px;
