@@ -83,7 +83,10 @@ function updateStatus(ball) {
 
 //Ball
 function drawCircleWithText(ctx, centerX, centerY, radius, color, lines) {
-    const outlineColor = darkenColor(color, 30);
+    // Add a glowing effect
+    ctx.shadowBlur = 20;
+    ctx.shadowColor = color;
+
     // Draw the main circle
     ctx.beginPath();
     ctx.arc(centerX, centerY, radius + 15, 0, 2 * Math.PI);
@@ -104,18 +107,13 @@ function drawCircleWithText(ctx, centerX, centerY, radius, color, lines) {
     ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI);
     ctx.stroke();
 
-    // Add a glowing effect
-    ctx.shadowBlur = 15;
-    ctx.shadowColor = color;
     ctx.beginPath();
     ctx.arc(centerX, centerY, radius + 10, 0, 2 * Math.PI);
     ctx.strokeStyle = darkenColor(color, 30);
     ctx.lineWidth = 5;
     ctx.stroke();
 
-    // Reset shadow properties to avoid affecting other drawings
-    ctx.shadowBlur = 0;
-    ctx.shadowColor = 'transparent';
+
 
     // Add text inside the circle    
     ctx.fillStyle = getBrightness(color) > 185 ? 'black' : 'white';
