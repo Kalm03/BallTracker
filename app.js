@@ -1,3 +1,10 @@
+let ball = {
+    position: { i: 0, j: 0, k: 0 },
+    MP: 0,
+    AC: 8,
+    damageType: 'Bludgeoning'
+};
+
 const damageColors = {
     Acid: '#98FB98',
     Bludgeoning: '#DCDCDC',
@@ -17,77 +24,59 @@ const damageColors = {
 document.getElementById('update-form').addEventListener('submit', function (event) {
     event.preventDefault();
     const formData = new FormData(event.target);
-    const data = {
-        damage: parseInt(formData.get('damage')),
-        i: parseInt(formData.get('i')),
-        j: parseInt(formData.get('j')),
-        k: parseInt(formData.get('k')),
-        damageType: formData.get('damageType')
-    };
-    fetch('/BallTracker/update', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    })
-        .then(response => response.json())
-        .then(data => {
-            updateStatus(data);
-        })
-        .then(() => {
-            document.getElementById('i').value = 0;
-            document.getElementById('j').value = 0;
-            document.getElementById('k').value = 0;
-        });
+
+    ball.position.i += Math.floor(parseInt(formData.get('i')) / 2);
+    ball.position.j += Math.floor(parseInt(formData.get('j')) / 2);
+    ball.position.k += Math.floor(parseInt(formData.get('k')) / 2);
+    ball.damageType = formData.get('damageType');
+
+    const damage = Math.floor(Math.sqrt(
+        ball.position.i ** 2 +
+        ball.position.j ** 2 +
+        ball.position.k ** 2
+    ));
+
+    ball.MP = damage;
+    ball.AC = 8 + ball.MP;
+
+    updateStatus(ball);
+
+    document.getElementById('i').value = 0;
+    document.getElementById('j').value = 0;
+    document.getElementById('k').value = 0;
 });
 
 document.getElementById('stop-button').addEventListener('click', function () {
-    fetch('/BallTracker/stop', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    })
-        .then(response => response.json())
-        .then(data => {
-            updateStatus(data);
-        });
+    ball.MP = Math.floor(ball.MP / 2);
+    ball.AC = 8 + ball.MP;
+
+    updateStatus(ball);
 });
 
 document.getElementById('reset-button').addEventListener('click', function () {
-    fetch('/BallTracker/reset', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    })
-        .then(response => response.json())
-        .then(data => {
-            updateStatus(data);
-        })
-        .then(() => {
-            document.getElementById('i').value = 0;
-            document.getElementById('j').value = 0;
-            document.getElementById('k').value = 0;
-        });
+    ball = {
+        position: { i: 0, j: 0, k: 0 },
+        MP: 0,
+        AC: 8,
+        damageType: 'Bludgeoning'
+    };
+
+    updateStatus(ball);
+
+    document.getElementById('i').value = 0;
+    document.getElementById('j').value = 0;
+    document.getElementById('k').value = 0;
 });
 
+updateStatus(ball);
 
-// Initial status fetch
-fetch('/BallTracker/status')
-    .then(response => response.json())
-    .then(data => {
-        updateStatus(data);
-    });
-
-function updateStatus(data) {
+function updateStatus(ball) {
     const canvas = document.getElementById('myCanvas');
     const ctx = canvas.getContext('2d');
-    const lines = [`${data.position.i}, ${data.position.j}, ${data.position.k}`, `MP: ${data.MP}`, `AC: ${data.AC}`, `${data.damageType}`];
+    const lines = [`${ball.position.i}, ${ball.position.j}, ${ball.position.k}`, `MP: ${ball.MP}`, `AC: ${ball.AC}`, `${ball.damageType}`];
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 
-    drawCircleWithText(ctx, canvas.width / 2, canvas.height / 2, 50, damageColors[data.damageType], lines);
+    drawCircleWithText(ctx, canvas.width / 2, canvas.height / 2, 50, damageColors[ball.damageType], lines);
 }
 
 //Ball
