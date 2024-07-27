@@ -12,6 +12,12 @@ body {
     background-color: #ead8c1;
 }
 
+select,
+input {
+    font-family: 'Libre Baskerville';
+    font-variant-caps: small-caps;
+}
+
 form {
     display: flex;
     flex-direction: column;
@@ -101,6 +107,7 @@ button {
 }
 
 .input-container input {
+    font-family: 'cormorant garamond', Times, serif, sans-serif;
     width: 30%;
     margin-left: 2px;
     margin-top: 5px;

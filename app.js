@@ -117,7 +117,7 @@ function drawCircleWithText(ctx, centerX, centerY, radius, color, lines) {
 
     // Add text inside the circle    
     ctx.fillStyle = getBrightness(color) > 185 ? 'black' : 'white';
-    ctx.font = '12px Arial';
+    ctx.font = 'small-caps 12px Libre Baskerville'; // Apply the small caps style
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
 
